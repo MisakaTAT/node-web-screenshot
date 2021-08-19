@@ -1,0 +1,24 @@
+{
+  "name": "node-web-screenshot",
+  "version": "1.0.0",
+  "description": "基于puppeteer与fastify的web截图服务",
+  "main": "index.js",
+  "dependencies": {
+    "fastify": "^3.20.2",
+    "puppeteer": "^10.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MisakaTAT/node-web-screenshot.git"
+  },
+  "author": "https://github.com/MisakaTAT",
+  "license": "https://github.com/MisakaTAT/node-web-screenshot/blob/main/LICENSE",
+  "bugs": {
+    "url": "https://github.com/MisakaTAT/node-web-screenshot/issues"
+  },
+  "homepage": "https://github.com/MisakaTAT/node-web-screenshot#readme"
+}
