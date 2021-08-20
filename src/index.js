@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 8080;
 async function webScreenShot(url, selector) {
   let browser = null;
   try {
-    browser = await puppeteer.launch();
+    browser = await await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     const page = await browser.newPage();
 
     await page.setViewport({
