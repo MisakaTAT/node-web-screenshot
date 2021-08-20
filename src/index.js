@@ -10,12 +10,13 @@ const puppeteer = require('puppeteer');
 const PORT = process.env.PORT || 8080;
 
 async function webScreenShot(url, selector) {
-  let browser = null;
+  let page = null;
   try {
-    browser = await await puppeteer.launch({
+    const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
-    const page = await browser.newPage();
+
+    page = await browser.newPage();
 
     await page.setViewport({
       width: 1920,
@@ -36,7 +37,7 @@ async function webScreenShot(url, selector) {
   } catch (err) {
     return { code: 500, status: 'failed', msg: err.message };
   } finally {
-    await browser.close();
+    if (page) await page.close();
   }
 }
 
