@@ -7,6 +7,8 @@ const fastify = require('fastify')({
 });
 const puppeteer = require('puppeteer');
 
+const PORT = process.env.PORT || 8080;
+
 async function webScreenShot(url, selector) {
   let browser = null;
   try {
@@ -22,12 +24,10 @@ async function webScreenShot(url, selector) {
     await page.goto(url, { waitUntil: 'load', timeout: 10000 });
 
     if (selector) {
-      // screenshot of the specified element
       let element = await page.$(selector);
       const buffer = await element.screenshot();
       return { code: 200, status: 'success', buffer: buffer };
     } else {
-      // full screenshot
       const buffer = await page.screenshot({ fullPage: true });
       return { code: 200, status: 'success', buffer: buffer };
     }
@@ -47,7 +47,6 @@ fastify.post('/', async function (request, reply) {
 
   if (!selector) selector = undefined;
 
-  // check url format
   let checkUrl = /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/.test(url);
   if (!checkUrl) reply.code(400).send({ code: 400, status: 'failed', msg: 'url syntax error' });
 
@@ -59,8 +58,8 @@ fastify.post('/', async function (request, reply) {
   }
 });
 
-fastify.listen(3000, (err, address) => {
-  console.log(`server is now listening on ${address}`);
+fastify.listen(PORT, (err, address) => {
+  console.log(`Server is now listening on ${address}`);
   if (err) {
     console.log(err);
   }
