@@ -60,7 +60,7 @@ fastify.post('/', async function (request, reply) {
   }
 });
 
-fastify.listen(PORT, (err, address) => {
+fastify.listen(PORT, '0.0.0,0', (err, address) => {
   console.log(`Server is now listening on ${address}`);
   if (err) {
     console.log(err);

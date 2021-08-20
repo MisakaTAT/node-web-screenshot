@@ -35,3 +35,10 @@ Full screenshot
     "url": "https://mikuac.com"
 }
 ```
+
+# Puppeteer Heroku Buildpack
+```shell
+heroku buildpacks:clear -a node-web-screenshot
+heroku buildpacks:add --index 1 https://github.com/jontewks/puppeteer-heroku-buildpack -a node-web-screenshot
+heroku buildpacks:add --index 1 heroku/nodejs -a node-web-screenshot
+```
