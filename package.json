@@ -9,14 +9,14 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MisakaTAT/node-web-screenshot.git"
   },
-  "author": "https://github.com/MisakaTAT",
-  "license": "https://github.com/MisakaTAT/node-web-screenshot/blob/main/LICENSE",
+  "author": "MisakaTAT",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MisakaTAT/node-web-screenshot/issues"
   },
