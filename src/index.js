@@ -37,13 +37,9 @@ async function webScreenShot(url, selector) {
   }
 }
 
-fastify.get('/', async function (request, reply) {
-  let url = request.query.url;
-  let selector = request.query.selector;
-
+async function handle(url ,selector, reply){
   if (url) url = url.trim();
   if (selector) selector = selector.trim();
-
   if (!selector) selector = undefined;
 
   let checkUrl = /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/.test(url);
@@ -55,26 +51,19 @@ fastify.get('/', async function (request, reply) {
   } else {
     reply.code(result.code).send(result);
   }
+}
+
+fastify.get('/', async function (request, reply) {
+  let url = request.query.url;
+  let selector = request.query.selector;
+  await handle(url, selector, reply);
+ 
 });
 
 fastify.post('/', async function (request, reply) {
   let url = request.body.url;
   let selector = request.body.selector;
-
-  if (url) url = url.trim();
-  if (selector) selector = selector.trim();
-
-  if (!selector) selector = undefined;
-
-  let checkUrl = /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/.test(url);
-  if (!checkUrl) reply.code(400).send({ code: 400, status: 'failed', msg: 'url syntax error' });
-
-  const result = await webScreenShot(url, selector);
-  if (result.code == 200) {
-    reply.code(200).type('image/png').send(result.imgBuffer);
-  } else {
-    reply.code(result.code).send(result);
-  }
+  await handle(url, selector, reply)
 });
 
 fastify.listen(PORT, '0.0.0.0', (err, address) => {
